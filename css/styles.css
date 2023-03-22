@@ -1,0 +1,34 @@
+html {
+    font-size: 18px;
+    font-family: 'Dosis', sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+#loginform {
+    width: 45%;
+    
+}
+#loginform input {
+    font-size: 0.8rem;
+}
+
+.form-text {
+    font-size: 0.7rem;
+    color: gray;
+    font-family: 'Dosis', sans-serif;
+}
+
+.form-label, .submitbtn {
+    font-size: 1rem;
+    font-family: 'Dosis', sans-serif;
+}
+.formtitle {
+    font-size: 1.3rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
