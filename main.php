@@ -35,8 +35,8 @@
         <!-- header -->
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid py-1 ps-1 pe-2">
-                <a class="navbar-brand" href="#" style="font-family: 'Poppins'; font-size:0.9rem; letter-spacing:1px;">
-                <img src="assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
+                <a class="navbar-brand" href="main.php" style="font-family: 'Poppins'; font-size:0.7rem; letter-spacing:1px;">
+                <img src="assets/images/key.png" alt="Logo" width="25" height="25" class="d-inline-block align-text-top mx-3">
                 Key Monitoring
                 </a>
 
@@ -58,6 +58,9 @@
 
             <!-- side navigation bar -->
             <div class="sidenav card h-100 p-2">
+                <div class="logo">
+                    <img src="assets/images/university-seal.png" alt="">
+                </div>
                 <ul type="none" class="w-100 mx-0 mt-2 py-1" id="nav">
                     <li><a href="#dashboard">Dashboard</a></li>
                     <li><a href="#userManagement">User Management</a></li>

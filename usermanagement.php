@@ -26,11 +26,7 @@
                         echo "<td>" . $res['first_name'] . " " . $res['last_name'] . "</td>";
                         echo "<td>" . $res['username'] . "</td>";
                         echo "<td>" . $res['user_type'] . "</td>";
-                        if($res['user_type'] == 'admin'){
-                            echo "<td>" . $res['teacher_id'] . "</td>";
-                        } else {
-                            echo "<td>" . $res['student_id'] . "</td>";
-                        }
+                        echo "<td>" . $res['student_teacher_id'] . "</td>";
                         echo "<td>" . $res['status'] . "</td>";
                         echo "<td><a class='edituser btn btn-primary rounded-pill px-4 py-1 m-0' href='#'
                           id='editUser'>EDIT</a></td></tr>";

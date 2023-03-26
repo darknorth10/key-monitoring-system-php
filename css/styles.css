@@ -10,9 +10,16 @@ body {
     margin: 0;
 }
 
+.main {
+    background-image: url('../assets/images/facade.jfif');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 90%;
+}
 #loginform {
-    width: 35%;
-    
+    width: 25%;
+    position: absolute;
 }
 
 #loginform input {
@@ -44,7 +51,17 @@ body {
 .sidenav {
     width: 18%;
 }
-
+.logo {
+    width: 75%;
+    height: 20%;
+    margin: 0 auto;
+}
+.logo img {
+    display: block;
+    margin: auto;
+    width: 50%;
+    height: 100%;
+}
 #nav {
     padding: 0;
 }
@@ -55,7 +72,7 @@ body {
     text-decoration: none ;
     color: #212121;
     font-family: 'Poppins';
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     display: block;
     width: 100%;
     height: 100%;
@@ -72,7 +89,7 @@ body {
 
 #transactionSubMenu li a {
     color: rgb(36, 36, 36);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 

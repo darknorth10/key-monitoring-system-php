@@ -27,7 +27,7 @@
     </nav>
 
     <!-- main container -->
-    <div class="main container d-flex justify-content-center">
+    <div class="main w-100 pb-3 d-flex justify-content-center">
          <!-- login form -->
         <form method="post" class="card bg-white p-4 mt-5 shadow" id="loginform">
 
