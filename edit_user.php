@@ -3,8 +3,11 @@
 
     if (empty($_SESSION['user'])) {
         header('location: index.php');
+    } elseif (empty($_SESSION['edit_user_id'])) {
+        header('location: main.php#userManagement');
     }
 
+    $sql = "SELECT * FROM user_table WHERE user_id = '$_SESSION['edit_user_id'"];
 
 ?>
 

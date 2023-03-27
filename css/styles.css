@@ -131,3 +131,9 @@ body {
 .errmessage p {
     padding: 10px;
 }
+
+.room_table table tr td, .room_table table tr th {
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 0.8rem;
+}

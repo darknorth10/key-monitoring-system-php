@@ -89,7 +89,7 @@
                 </div>
 
                 <!-- USER MANAGEMENT -->
-                <div class="dashboard h-100 w-100 mb-2 p-3 bg-light" id="userManagement">
+                <div class="usermanagement h-100 w-100 mb-2 p-3 bg-light" id="userManagement">
                     <h4>User Management</h4>
 
                     <?php include 'usermanagement.php'; ?>
@@ -97,12 +97,12 @@
                 </div>
 
                 <!-- BARROWERS PROFILE -->
-                <div class="dashboard h-100 w-100 mb-2 p-3 bg-light" id="barrowersProfile">
+                <div class="barrowersz h-100 w-100 mb-2 p-3 bg-light" id="barrowersProfile">
                     <h4>Borrowers Profile</h4>
                 </div>
 
                 <!--  ROOMS -->
-                <div class="dashboard h-100 w-100 mb-2 p-3 bg-light" id="rooms">
+                <div class="rooms h-100 w-100 mb-2 p-3 bg-light" id="rooms">
                     <h4>Rooms</h4>
                     <?php include 'rooms.php'; ?>
                 </div>
@@ -123,4 +123,4 @@
 
 </script>
 </body>
-</html>
+</html> 

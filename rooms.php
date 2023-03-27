@@ -9,6 +9,7 @@
                 <th>Room Category</th>
                 <th>Floor</th>
                 <th>Room Status</th>
+                <th>Action</th>
             </tr>
                 <?php
                     
@@ -20,7 +21,7 @@
 
                     while($res = mysqli_fetch_array($result)) {
                         echo "<tr><td>" . $res['room_no'] . "</td>";
-                        echo "<td>" . $res['room_category'] . " " . $res['last_name'] . "</td>";
+                        echo "<td>" . $res['room_category'] . "</td>";
                         echo "<td>" . $res['floor'] . "</td>";
                         echo "<td>" . $res['room_status'] . "</td>";
                         echo "<td><a class='editroom btn btn-primary rounded-pill px-4 py-1 m-0' href='#'>EDIT</a></td></tr>";
