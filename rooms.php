@@ -1,6 +1,6 @@
 <div class="main-room h-100 w-100 bg-light p-2">
     <div class="actionbar w-100 d-inline-flex justify-content-end">
-        <a href="add_user.php" class="btn btn-primary rounded-pill" style="font-size: 0.8em;">+ Add New Room</a>
+        <a href="add_room .php" class="btn btn-primary rounded-pill" style="font-size: 0.8em;">+ Add New Room</a>
     </div>
     <div class="room_table h-75 bg-white rounded shadow-sm mt-4">
         <table class="table rounded">

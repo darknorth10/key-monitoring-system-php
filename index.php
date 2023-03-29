@@ -49,7 +49,7 @@
                         if ( empty($username) || empty($password)) {
                             echo "<p class='err_text text-danger text-center p-2 rounded'>All Fields are required</p>";
                         } else {
-                            $query = "SELECT * FROM user_tbl WHERE username = '$username' AND password = '$password'";
+                            $query = "SELECT * FROM user_tbl WHERE username = '$username' AND password = '$password' OR student_teacher_id = '$username' AND password = '$password'";
 
                             $result = mysqli_query($conn, $query);
 
@@ -58,14 +58,21 @@
 
                                 if ($results['status'] == 'active') {
                                    
-                                    $_SESSION['user'] = $results['username'];
-                                    $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
+                                    // if the user is admin
+                                    if ($results['user_type'] == 'admin') {
+                                        $_SESSION['user'] = $results['username'];
+                                        $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
 
-                                    header('location: main.php');
+                                        header('location: main.php');
+                                    } else if ($results['user_type'] = 'student_assistant') {
+                                        $_SESSION['user'] = $results['username'];
+                                        $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
+
+                                        header('location: assistant.php');
+                                    }
 
                                 } else {
                                     echo "<p class='err_text text-danger text-center p-2 rounded'>User is inactive</p>";
-
                                 }
                                 
                             } else {

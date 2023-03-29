@@ -34,12 +34,16 @@
                             echo "<td class='text-danger'>" . $res['status'] . "</td>";
                         }
             
-                        echo "<td>
-                          <form method='post' action='edit_user_action.php'>
+                        echo "<td class='d-flex justify-content-center'>
+                          <form method='post' action='edit_user_action.php' class='me-2'>
                           <input type='hidden' name='userid' value=" . $res['user_id'] . "'>" .
                           "<button type='submit' class='edituser btn btn-primary rounded-pill px-4 py-1 m-0' href='#'
                           id='editUser'>EDIT</button>
-                          </form></td></tr>";
+                          </form>
+                          <button type='submit' class='edituser btn btn-primary rounded-pill px-4 py-1 m-0' href='#'
+                          id='editUser'>CHANGE PASSWORD</button>
+                          </td>
+                          </tr>";
                     }
 
                 ?>
