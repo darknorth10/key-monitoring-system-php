@@ -27,9 +27,19 @@
                         echo "<td>" . $res['username'] . "</td>";
                         echo "<td>" . $res['user_type'] . "</td>";
                         echo "<td>" . $res['student_teacher_id'] . "</td>";
-                        echo "<td>" . $res['status'] . "</td>";
-                        echo "<td><a class='edituser btn btn-primary rounded-pill px-4 py-1 m-0' href='#'
-                          id='editUser'>EDIT</a></td></tr>";
+                        
+                        if($res['status'] == 'active') {
+                            echo "<td class='text-success'>" . $res['status'] . "</td>";
+                        } else {
+                            echo "<td class='text-danger'>" . $res['status'] . "</td>";
+                        }
+            
+                        echo "<td>
+                          <form method='post' action='edit_user_action.php'>
+                          <input type='hidden' name='userid' value=" . $res['user_id'] . "'>" .
+                          "<button type='submit' class='edituser btn btn-primary rounded-pill px-4 py-1 m-0' href='#'
+                          id='editUser'>EDIT</button>
+                          </form></td></tr>";
                     }
 
                 ?>

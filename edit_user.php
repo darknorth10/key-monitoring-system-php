@@ -1,13 +1,20 @@
 <?php
+    
+    require('connection.php');
     session_start();
+    
+    $editUserid = (int)$_SESSION['userid'];
 
-    if (empty($_SESSION['user'])) {
-        header('location: index.php');
-    } elseif (empty($_SESSION['edit_user_id'])) {
-        header('location: main.php#userManagement');
+    if (empty($editUserid)) {
+        header('Location: main.php#userManagement');
     }
+   
 
-    $sql = "SELECT * FROM user_table WHERE user_id = '$_SESSION['edit_user_id'"];
+
+    $sql = "SELECT * FROM user_tbl WHERE user_id = '$editUserid'";
+
+    $result2 = mysqli_query($conn, $sql);
+    $rez = mysqli_fetch_assoc($result2); 
 
 ?>
 
@@ -38,7 +45,7 @@
         <!-- header -->
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid py-1 ps-1 pe-2">
-                <a class="navbar-brand" href="#" style="font-family: 'Poppins'; font-size:0.9rem; letter-spacing:1px;">
+                <a href='main.php#userManagement' class="navbar-brand" href="#" style="font-family: 'Poppins'; font-size:0.9rem; letter-spacing:1px;">
                 <img src="assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
                 Key Monitoring | Add User
                 </a>
@@ -58,48 +65,30 @@
 
         <div class="add_user card bg-white w-50 mx-auto p-0 mt-3">
             <div class="card-header pt-3 bg-primary text-white">
-                <h6>Create New User</h6>
+                <h6>Edit User</h6>
             </div>
             <form class="p-3" method="post" id="add_user_form">
                 <?php
-                    require('connection.php');
-
 
                     #validations error
                     if (isset($_POST['adduserSubmit'])) {
                         $fname = $_POST['fname'];
                         $lname = $_POST['lname'];
-                        $username = $_POST['username'];
-                        $password = $_POST['password'];
-                        $cpassword = $_POST['cpassword'];
                         $usertype = $_POST['usertype'];
                         $status = $_POST['status'];
-                        $tsid = $_POST['tsid'];
 
 
-                        if (empty($fname) || empty($lname) || empty($username) || empty($password) || empty($cpassword) || empty($usertype) ||  empty($tsid)) {
+                        if (empty($fname) || empty($lname) || empty($usertype) || empty($status)) {
                                 echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> All fields are required </p> </div>";
                         } else {
-                            
-                            if($password != $cpassword) {
-                                echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Passwords Do Not Match </p> </div>";
-                            }
-                            else if ($usertype == "false" || $status == "false") {
+
+                            if ($usertype == "false" || $status == "false") {
                                 echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Select options for user type or status </p> </div>";
-
                             } else {
-                                # $sql = "INSERT INTO `user_tbl`(`user_id`, `first_name`, `last_name`, `username`, `password`, `user_type`, `status`, `student_id`, `teacher_id`) VALUES ( Null,'$fname','$lname','$username','$password','$usertype','$status','$tsid','$tsid')";
-                                $sql = "SELECT * FROM user_tbl WHERE username = '$username' OR student_teacher_id = '$tsid'";
-                                $result = mysqli_query($conn, $sql);
+                                $query = "UPDATE user_tbl SET first_name = '$fname', last_name = '$lname', user_type = '$usertype', status = '$status' WHERE user_id = '$editUserid'";
+                                mysqli_query($conn, $query);
 
-                                if(mysqli_num_rows($result) == 0) {
-                                    $sql = "INSERT INTO `user_tbl`(`user_id`, `first_name`, `last_name`, `username`, `password`, `user_type`, `status`, `student_teacher_id`) VALUES ( Null,'$fname','$lname','$username','$password','$usertype','$status','$tsid')";
-                                    mysqli_query($conn, $sql);
-
-                                    header('location: main.php#userManagement');
-                                } else {
-                                    echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Username or Teacher/Student ID already exist </p> </div>";
-                                }
+                                header('location: main.php#userManagement');
                             }
                         }
                         
@@ -109,65 +98,40 @@
                 <div class="row">
                     <div class="col">
                         <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="fname" placeholder="First Name" required>
+                        <input type="text" class="form-control" name="fname" placeholder="First Name" value='<?php echo $rez['first_name'];  ?>' required>
                         <label for="floatingInput">First Name</label>
                         </div>
                     </div>
 
                     <div class="col">
                         <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="lname" placeholder="Last Name" required>
+                        <input type="text" class="form-control" name="lname" placeholder="Last Name" value='<?php echo $rez['last_name'];  ?>' required>
                         <label for="floatingInput">Last Name</label>
                         </div>
                     </div>
                 </div>
                 
-                
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="username" placeholder="Username" required>
-                    <label for="floatingInput">Username</label>
-                </div>
 
-                <div class="row">
-                    <div class="col">
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" name="password" required placeholder="Password">
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <div class="form-floating">
-                            <input type="password" class="form-control" name="cpassword" required placeholder="Re-type Password">
-                            <label for="floatingPassword">Re-type Password</label>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="row mb-3">
                     <div class="col">
-                        <select name="usertype" class="form-select" aria-label="Default select example">
-                            <option value="false" selected>Select User Type</option>
+                        <select name="usertype" class="form-select" aria-label="Default select example" value='<?php echo $rez['user_type'];  ?>'>
+                            <option value="false">Select User Type</option>
                             <option value="admin">Admin</option>
                             <option value="student assistant">Student Assistant</option>
                         </select>
                     </div>
 
                     <div class="col">
-                        <select name="status" class="form-select" aria-label="Default select example">
-                            <option value="false" selected>Set Status</option>
+                        <select name="status" class="form-select" aria-label="Default select example" value='<?php echo $rez['status'];  ?>'>
+                            <option value="false">Set Status</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class="form-floating my-3">
-                    <input type="text" name="tsid" class="form-control" placeholder="Teacher / Student ID" required>
-                    <label for="floatingPassword">Teacher / Student ID</label>
-                </div>
-                
-                <button type="submit" name="adduserSubmit" class="btn btn-success d-inline-block w-100">Create User</button>
+                <button type="submit" name="adduserSubmit" class="btn btn-success d-inline-block w-100">Update User</button>
             </form>
         </div>
     </div>
