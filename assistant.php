@@ -47,7 +47,7 @@
                         ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" style="font-size: 0.7rem;">
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item text-center" href="logout.php">Logout <img class='ms-2' src="assets/images/logout.png" height="20" width="20"></a></li>
                     </ul>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 <!--  ROOMS -->
                 <div class="rooms h-100 w-100 mb-2 p-3 bg-light" id="rooms">
                     <h4>Rooms</h4>
-                    <?php include 'rooms.php'; ?>
+                    <?php include 'rooms/rooms.php'; ?>
                 </div>
                 
             </div>

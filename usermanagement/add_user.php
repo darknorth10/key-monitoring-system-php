@@ -2,7 +2,7 @@
     session_start();
 
     if (empty($_SESSION['user'])) {
-        header('location: index.php');
+        header('location: ../index.php');
     }
 
 
@@ -20,9 +20,9 @@
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Poppins:wght@300&display=swap" rel="stylesheet">
     <!-- bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- custom styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
 </head>
 <body>
@@ -36,8 +36,8 @@
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid py-1 ps-1 pe-2">
                 <a class="navbar-brand" href="#" style="font-family: 'Poppins'; font-size:0.9rem; letter-spacing:1px;">
-                <img src="assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
-                Key Monitoring | Add Room
+                <img src="../assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
+                Key Monitoring | Add User
                 </a>
 
                 <div class="dropdown me-4 ">
@@ -47,21 +47,20 @@
                         ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" style="font-size: 0.7rem;">
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item text-center" href="../logout.php">Logout <img class='ms-2' src="../assets/images/logout.png" height="20" width="20"></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <a class="btn btn-dark mx-4 mt-3" href="../main.php#userManagement" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
 
-        <div class="add_user card bg-white w-50 mx-auto p-0 mt-3">
+        <div class="add_user card bg-white w-50 mx-auto p-0">
             <div class="card-header pt-3 bg-primary text-white">
-                <h6>Regiser New Room</h6>
+                <h6>Create New User</h6>
             </div>
             <form class="p-3" method="post" id="add_user_form">
                 <?php
-                    require('connection.php');
-
-
+                    require('../connection.php');
                     #validations error
                     if (isset($_POST['adduserSubmit'])) {
                         $fname = $_POST['fname'];
@@ -93,9 +92,9 @@
                                     $sql = "INSERT INTO `user_tbl`(`user_id`, `first_name`, `last_name`, `username`, `password`, `user_type`, `status`, `student_teacher_id`) VALUES ( Null,'$fname','$lname','$username','$password','$usertype','$status','$tsid')";
                                     mysqli_query($conn, $sql);
 
-                                    header('location: main.php#userManagement');
+                                    echo "<div class='succmessage p-0 rounded text-center text-success'> <p> User has been registered successfuly. </p> </div>";
                                 } else {
-                                    echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Username or Teacher/Student ID already exist </p> </div>";
+                                    echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Username or Teacher/Student ID already exist. </p> </div>";
                                 }
                             }
                         }
@@ -176,7 +175,7 @@
 
 
 <!-- bootstarp bundle -->
-<script src="css/bootstrap.bundle.min.js"></script>
+<script src="../css/bootstrap.bundle.min.js"></script>
 <script>
     window.addEventListener('resize', function(){
         location.reload();

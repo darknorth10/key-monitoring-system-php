@@ -12,14 +12,21 @@ body {
 
 .main {
     background-image: url('../assets/images/facade.jfif');
-    background-position: center top;
+    background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 90%;
+    height: 100%;
+}
+#headerLogin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 #loginform {
     width: 25%;
     position: absolute;
+    top: 15%;
 }
 
 #loginform input {
@@ -52,7 +59,7 @@ body {
     width: 15%;
 }
 .logo {
-    width: 75%;
+    width: 90%;
     height: 20%;
     margin: 0 auto;
 }
@@ -65,8 +72,9 @@ body {
 #nav {
     padding: 0;
 }
-#nav li {
-    padding: 10px 0;
+#nav > li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
 }
 #nav li a {
     text-decoration: none ;
@@ -79,8 +87,6 @@ body {
     padding: 10px 0 10px 30px;
     border-radius: 5px;
     transition: background, padding-left 0.4s;
-    border-bottom: 0.5px solid rgb(196, 196, 196);
-
 }
 #nav li a:hover {
     background: #78bcf7;
@@ -88,24 +94,28 @@ body {
 }
 
 #transactionSubMenu li a {
-    color: rgb(36, 36, 36);
     font-size: 0.7rem;
+}
+#carret, #bcarret {
+    transition: all 0.4s;
 }
 
 
 .user_table table tr {
     font-family: 'Inter';
-    text-align: center;
     font-size: 0.8rem;
+}
+.user_table table th {
+    text-align: center;
 }
 .user_table table td {
     font-family: 'Poppins';
-    text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    padding-left: 18px;
 }
 
 .edituser {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     padding: 0;
 }
 
@@ -131,9 +141,23 @@ body {
 .errmessage p {
     padding: 10px;
 }
+.succmessage {
+    font-size: 0.7rem;
+    font-family: 'Poppins';
+    background-color: rgb(228, 253, 247);
+}
+.succmessage p {
+    padding: 10px;
+}
 
 .room_table table tr td, .room_table table tr th {
-    text-align: center;
     font-family: 'Poppins';
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+}
+.room_table table tr td {
+    padding-left: 20px;
+}
+
+.room_table table tr th {
+    padding-left: 20px;
 }

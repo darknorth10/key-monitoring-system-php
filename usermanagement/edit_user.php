@@ -1,15 +1,14 @@
 <?php
     
-    require('connection.php');
+    require('../connection.php');
     session_start();
     
     $editUserid = (int)$_SESSION['userid'];
 
     if (empty($editUserid)) {
-        header('Location: main.php#userManagement');
+        header('Location: ../main.php#userManagement');
     }
    
-
 
     $sql = "SELECT * FROM user_tbl WHERE user_id = '$editUserid'";
 
@@ -30,9 +29,9 @@
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Poppins:wght@300&display=swap" rel="stylesheet">
     <!-- bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <!-- custom styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 
 </head>
 <body>
@@ -46,8 +45,8 @@
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid py-1 ps-1 pe-2">
                 <a href='main.php#userManagement' class="navbar-brand" href="#" style="font-family: 'Poppins'; font-size:0.9rem; letter-spacing:1px;">
-                <img src="assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
-                Key Monitoring | Add User
+                <img src="../assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
+                    Key Monitoring | Edit User
                 </a>
 
                 <div class="dropdown me-4 ">
@@ -57,17 +56,17 @@
                         ?>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" style="font-size: 0.7rem;">
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item text-center" href="../logout.php">Logout <img class='ms-2' src="../assets/images/logout.png" height="20" width="20"></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+        <a class="btn btn-dark mx-4 my-3" href="../main.php#userManagement" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
         <div class="add_user card bg-white w-50 mx-auto p-0 mt-3">
             <div class="card-header pt-3 bg-primary text-white">
-                <h6>Edit User</h6>
+                <h6>Edit User : <span class="border rounded px-2 py-1"><?php echo $rez['username'] ."  |  ". $rez['student_teacher_id']; ?></span></h6>
             </div>
-            <form class="p-3" method="post" id="add_user_form">
+            <form class="p-3" method="post" id="edit_user_form">
                 <?php
 
                     #validations error
@@ -78,18 +77,16 @@
                         $status = $_POST['status'];
 
 
-                        if (empty($fname) || empty($lname) || empty($usertype) || empty($status)) {
-                                echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> All fields are required </p> </div>";
-                        } else {
+                        if (empty($fname) || empty($lname)) {
+                            echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> All fields are required </p> </div>";
+                        } else if ($rez['first_name'] == $fname && $rez['last_name'] == $lname && $rez['user_type'] == $usertype && $rez['status'] == $status) {
+                            echo "<div class='succmessage p-0 rounded text-center text-dark'> <p> No Changes Detected </p> </div>";
+                        } 
+                        else {
+                            $query = "UPDATE user_tbl SET first_name = '$fname', last_name = '$lname', user_type = '$usertype', status = '$status' WHERE user_id = '$editUserid'";
+                             mysqli_query($conn, $query);
 
-                            if ($usertype == "false" || $status == "false") {
-                                echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Select options for user type or status </p> </div>";
-                            } else {
-                                $query = "UPDATE user_tbl SET first_name = '$fname', last_name = '$lname', user_type = '$usertype', status = '$status' WHERE user_id = '$editUserid'";
-                                mysqli_query($conn, $query);
-
-                                header('location: main.php#userManagement');
-                            }
+                             header('location: ../main.php#userManagement');
                         }
                         
                     }   
@@ -115,18 +112,33 @@
 
                 <div class="row mb-3">
                     <div class="col">
-                        <select name="usertype" class="form-select" aria-label="Default select example" value='<?php echo $rez['user_type'];  ?>'>
-                            <option value="false">Select User Type</option>
-                            <option value="admin">Admin</option>
-                            <option value="student assistant">Student Assistant</option>
+                        <select name="usertype" class="form-select" aria-label="Default select example">
+                        <?php
+                            if ($rez['user_type'] == 'admin') {
+                                echo "<option value='admin' selected>Admin</option>
+                                <option value='student assistant'>Student Assistant</option>";
+                            } else {
+                                echo "<option value='admin'>Admin</option>
+                                <option value='student assistant' selected >Student Assistant</option>";
+                            }
+
+                        ?>
+                            
                         </select>
                     </div>
 
                     <div class="col">
                         <select name="status" class="form-select" aria-label="Default select example" value='<?php echo $rez['status'];  ?>'>
-                            <option value="false">Set Status</option>
-                            <option value="active">Active</option>
-                            <option value="inactive">Inactive</option>
+                        <?php
+                            if ($rez['status'] == 'active') {
+                                echo "<option value='active' selected>Active</option>
+                                <option value='inactive'>Inactive</option>";
+                            } else {
+                                echo "<option value='active'>Active</option>
+                                <option value='inactive' selected >Inactive</option>";
+                            }
+
+                        ?>
                         </select>
                     </div>
                 </div>
@@ -142,13 +154,13 @@
     
 
 
-<!-- bootstarp bundle -->
-<script src="css/bootstrap.bundle.min.js"></script>
-<script>
-    window.addEventListener('resize', function(){
-        location.reload();
-}, true);
+    <!-- bootstarp bundle -->
+    <script src="../css/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('resize', function(){
+            location.reload();
+         }, true);
 
-</script>
+    </script>
 </body>
 </html>
