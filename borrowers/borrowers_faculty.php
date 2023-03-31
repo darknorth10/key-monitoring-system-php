@@ -31,9 +31,9 @@
                         }
             
                         echo "<td class='d-flex justify-content-center'>
-                          <form method='post' action='usermanagement/edit_user_action.php' class='me-2'>
-                          <input type='hidden' name='barrowerid' value='" . $res['stud_employee_no'] . "'>" .
-                          "<input type='hidden' name='action' value='updateUser'>" .
+                          <form method='post' action='borrowers/get_borrower_no.php' class='me-2'>
+                          <input type='hidden' name='borrowerid' value='" . $res['stud_employee_no'] . "'>" .
+                          "<input type='hidden' name='action' value='updateFaculty'>" .
                           "<button type='submit' class='edituser btn btn-success shadow-sm rounded-pill px-3 py-1 m-0'
                           >EDIT<img class='ms-2 mb-1' src='assets/images/editing.png' height='15' width='15'></button>
                           </form></td></tr>";
