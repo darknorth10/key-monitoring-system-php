@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    require('connection.php');
     if (empty($_SESSION['user'])) {
         header('location: index.php');
     }
@@ -62,22 +62,27 @@
                     <img src="assets/images/university-seal.png" alt="">
                 </div>
                 <ul type="none" class="w-100 mx-0 mt-2 py-1" id="nav">
-                    <li><a href="#dashboard">Dashboard</a></li> 
-                    <li><a href="#barrowersProfile">Borrowers Profile</a></li>
-                    <li><a href="#rooms">Rooms</a></li>
-                    <li><a data-bs-toggle="collapse" href="#transactionSubMenu" role="button" aria-expanded="false" aria-controls="transactionSubMenu">Transactions</a></li>
+                    <li><a href="assistant.php">Dashboard</a></li>
 
-                    <ul class="collapse" id="transactionSubMenu" type="none">
-                        <li><a href="#">Borrow Room</a></li>
-                        <li><a href="#">Return Key</a></li>
+                    <li id="barrowLi"><a data-bs-toggle="collapse" href="#borrowersSubMenu" role="button" aria-expanded="false" aria-controls="borrowersSubMenu" id="bsubmenuToggle">Borrowers Profile <img class="ms-1" src="assets/images/down-arrow.png" width="10" height="10" id="bcarret"></a></li>
+
+                    <ul class="p-0 collapse shadow-inner m-1" style="background-color: #eee;" id="borrowersSubMenu" type="none">
+                        <li><a href="#borrowerStudent">Student</a></li>
+                        <li><a href="#borrowerFaculty">Faculty</a></li>
                     </ul>
 
-                    <li><a href="#auditTrail">Audit Trail</a></li>
+                    <li id="transLi"><a data-bs-toggle="collapse" href="#transactionSubMenu" role="button" aria-expanded="false" aria-controls="transactionSubMenu" id="submenuToggle">Transactions <img class="ms-4" src="assets/images/down-arrow.png" width="10" height="10" id="carret"></a></li>
+
+                    <ul class="p-0 collapse shadow-inner" style="background-color: #eee;" id="transactionSubMenu" type="none">
+                        <li><a href="#borrow">Borrow Room</a></li>
+                        <li><a href="#returnKey">Return Key</a></li>
+                    </ul>
+
                 </ul>
             </div>
 
             <!-- include content page here -->
-            <div class="page m-0 bg-light overflow-hidden" style="width: 80%;">
+            <div class="page m-0 overflow-hidden" style="width: 90%;">
 
                 <!-- DASHBOARD -->
                 <div class="dashboard h-100 w-100 mb-2 p-3 bg-light" id="dashboard">
@@ -88,15 +93,37 @@
                 </div>
 
                 <!-- BARROWERS PROFILE -->
-                <div class="barrowersz h-100 w-100 mb-2 p-3 bg-light" id="barrowersProfile">
-                    <h4>Borrowers Profile</h4>
+                <!-- for student -->
+                <div class="borrowersStudent h-100 w-100 mb-2 p-3 bg-light" id="borrowerStudent">
+                    <h4>Borrowers Profile | Student</h4>
+
+                    <?php include 'borrowers/borrowers_student.php'; ?>
+                </div>
+                <!-- for faculty -->
+                <div class="borrowerFaculty h-100 w-100 mb-2 p-3 bg-light" id="borrowerFaculty">
+                    <h4>Borrowers Profile | Faculty</h4>
+
+                    <?php include 'borrowers/borrowers_faculty.php'; ?>
                 </div>
 
-                <!--  ROOMS -->
-                <div class="rooms h-100 w-100 mb-2 p-3 bg-light" id="rooms">
-                    <h4>Rooms</h4>
-                    <?php include 'rooms/rooms.php'; ?>
+                
+                <!--  Transactions -->
+                <div class="transaction h-100 w-100 mb-2 p-3 bg-light" id="borrow">
+                    <h4>Transaction | Borrow Room</h4>
+
+                    <?php include 'transactions/borrowkey.php'; ?>
+
                 </div>
+
+                <!--  Transactions -->
+                <div class="transaction h-100 w-100 mb-2 p-3 bg-light" id="returnKey">
+                    <h4>Transaction | Return Key</h4>
+
+                    <?php include 'transactions/returnkey.php'; ?>
+
+                </div>
+
+
                 
             </div>
         </div>
@@ -105,13 +132,31 @@
     
 
 
-<!-- bootstarp bundle -->
-<script src="css/bootstrap.bundle.min.js"></script>
-<script>
-    window.addEventListener('resize', function(){
-        location.reload();
-}, true);
+    <!-- bootstarp bundle -->
+    <script src="css/bootstrap.bundle.min.js"></script>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        window.addEventListener('resize', function(){
+            location.reload();
+        }, true);
+        
+        $("#transLi").click(function (e) { 
+            if ($('#submenuToggle').attr('aria-expanded') == 'true') {
+                $("#carret").css('transform', 'rotate(90deg)');
+            } else {
+                $("#carret").css('transform', 'rotate(0deg)');
+            }
+        });
 
-</script>
+        $("#barrowLi").click(function (e) { 
+            if ($('#bsubmenuToggle').attr('aria-expanded') == 'true') {
+                $("#bcarret").css('transform', 'rotate(90deg)');
+            } else {
+                $("#bcarret").css('transform', 'rotate(0deg)');
+            }
+        });
+        
+    </script>
 </body>
 </html> 

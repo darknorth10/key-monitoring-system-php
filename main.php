@@ -62,7 +62,7 @@
                     <img src="assets/images/university-seal.png" alt="">
                 </div>
                 <ul type="none" class="w-100 mx-0 mt-2 py-1" id="nav">
-                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="main.php">Dashboard</a></li>
                     <li><a href="#userManagement">User Management</a></li>
                     <li id="barrowLi"><a data-bs-toggle="collapse" href="#borrowersSubMenu" role="button" aria-expanded="false" aria-controls="borrowersSubMenu" id="bsubmenuToggle">Borrowers Profile <img class="ms-1" src="assets/images/down-arrow.png" width="10" height="10" id="bcarret"></a></li>
 

@@ -169,3 +169,7 @@ body {
 .borrowform .col select, .borrowform .col button {
     font-size: 0.8rem;
 }
+
+.cards .card {
+    font-family: 'Inter';
+}

@@ -61,11 +61,14 @@
                                     // if the user is admin
                                     if ($results['user_type'] == 'admin') {
                                         $_SESSION['user'] = $results['username'];
+                                        $_SESSION['usertype'] = $results['user_type'];
                                         $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
 
                                         header('location: main.php');
                                     } else if ($results['user_type'] = 'student_assistant') {
                                         $_SESSION['user'] = $results['username'];
+                                        $_SESSION['usertype'] = $results['user_type'];
+
                                         $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
 
                                         header('location: assistant.php');
