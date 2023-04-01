@@ -30,21 +30,16 @@
 
 </head>
 <body>
-
-<h1><?php
-    echo $_SESSION['borrowerid'];
-?></h1>
-
     <!-- main div wrapper -->
 
-    <div class="main-wrapper bg-light d-flex flex-column h-100 w-100 p-0 m-0">
+    <div class="main-wrapper bg-secondary d-flex flex-column h-100 w-100 p-0 m-0">
 
         <!-- header -->
         <nav class="navbar bg-dark" data-bs-theme="dark">
             <div class="container-fluid py-1 ps-1 pe-2">
                 <a class="navbar-brand" href="#" style="font-family: 'Poppins'; font-size:0.9rem; letter-spacing:1px;">
                 <img src="../assets/images/key.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top mx-3">
-                Key Monitoring | Add Borrower
+                Key Monitoring | Update Borrower
                 </a>
 
                 <div class="dropdown me-4 ">
@@ -62,8 +57,8 @@
         <a class="btn btn-dark mx-4 mt-3" href="../main.php#borrowerStudent" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
 
         <div class="add_user card bg-white w-50 mx-auto p-0">
-            <div class="card-header pt-3 bg-primary text-white">
-                <h6>Add New Borrower</h6>
+            <div class="card-header pt-3 bg-dark text-white">
+                <h6>Edit Borrower : <span class="border rounded px-2 py-1"><?php echo $result['stud_employee_no'] ."  |  ". $result['firstname'] . ' ' . $result['lastname'] ; ?></span></h6>
             </div>
             <form class="p-3" method="post" id="add_user_form">
                 <?php
@@ -195,7 +190,7 @@
                         </select>
                     </div>
                 </div>
-                <button type="submit" name="updateborrowerSubmit" class="btn btn-success d-inline-block w-100">Update Borrower</button>
+                <button type="submit" name="updateborrowerSubmit" class="btn btn-primary d-inline-block w-100">Update Borrower</button>
             </form>
         </div>
     </div>

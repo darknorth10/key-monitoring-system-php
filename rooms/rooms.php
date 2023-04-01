@@ -3,14 +3,13 @@
         <a href="rooms/add_room.php" class="btn btn-primary rounded-pill" style="font-size: 0.8em;">+ Add New Room</a>
     </div>
     <div class="room_table h-75 w-75 mx-auto bg-white rounded shadow-sm mt-2 overflow-scroll">
-        <table class="table rounded">
+        <table class="table rounded table-success table-striped">
             <tr class="table-primary position-sticky top-0">
                 <th>Room No.</th>
                 <th>Room Category</th>
                 <th>Floor</th>
                 <th>Room Status</th>
                 <th class="ps-5">Action</th>
-
             </tr>
                 <?php
                     require('connection.php');
@@ -24,7 +23,7 @@
                         echo "<td>" . $res['room_category'] . "</td>";
                         echo "<td>" . $res['floor'] . "</td>";
                         if($res['room_status'] == 'Available') {
-                            echo "<td class='text-success'>" . $res['room_status'] . "</td>";
+                            echo "<td class='text-primary'>" . $res['room_status'] . "</td>";
                         } else {
                             echo "<td class='text-danger'>" . $res['room_status'] . "</td>";
                         }

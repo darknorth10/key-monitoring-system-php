@@ -35,7 +35,7 @@
 <body>
     <!-- main div wrapper -->
 
-    <div class="main-wrapper bg-light d-flex flex-column h-100 w-100 p-0 m-0">
+    <div class="main-wrapper bg-secondary d-flex flex-column h-100 w-100 p-0 m-0">
 
         <!-- header -->
         <nav class="navbar bg-dark" data-bs-theme="dark">

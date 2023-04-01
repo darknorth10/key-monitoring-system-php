@@ -125,11 +125,17 @@
                 <!--  Transactions -->
                 <div class="transaction h-100 w-100 mb-2 p-3 bg-light" id="borrow">
                     <h4>Transaction | Borrow Room</h4>
+
+                    <?php include 'transactions/borrowkey.php'; ?>
+
                 </div>
 
                 <!--  Transactions -->
                 <div class="transaction h-100 w-100 mb-2 p-3 bg-light" id="returnKey">
                     <h4>Transaction | Return Key</h4>
+
+                    <?php include 'transactions/returnkey.php'; ?>
+
                 </div>
 
                 <!--  Audit Trail -->

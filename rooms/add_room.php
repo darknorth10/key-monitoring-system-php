@@ -30,7 +30,7 @@
     
     <!-- main div wrapper -->
 
-    <div class="main-wrapper bg-light d-flex flex-column h-100 w-100 p-0 m-0">
+    <div class="main-wrapper d-flex flex-column h-100 w-100 p-0 m-0" style="background-color: #eee;">
 
         <!-- header -->
         <nav class="navbar bg-dark" data-bs-theme="dark">
@@ -55,7 +55,7 @@
 
         <a class="btn btn-dark mx-4 my-3" href="../main.php#rooms" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
 
-        <div class="add_user card bg-white w-50 mx-auto p-0 mt-3">
+        <div class="add_user card shadow-sm w-50 mx-auto p-0 mt-3">
             <div class="card-header pt-3 bg-primary text-white">
                 <h6>Register New Room</h6>
             </div>

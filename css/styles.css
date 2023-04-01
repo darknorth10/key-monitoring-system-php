@@ -104,14 +104,18 @@ body {
 .user_table table tr {
     font-family: 'Inter';
     font-size: 0.8rem;
+    box-sizing: border-box;
 }
 .user_table table th {
     text-align: center;
+    box-sizing: border-box;
+
 }
 .user_table table td {
     font-family: 'Poppins';
     font-size: 0.7rem;
     padding-left: 18px;
+    box-sizing: border-box;
 }
 
 .edituser {
@@ -160,4 +164,8 @@ body {
 
 .room_table table tr th {
     padding-left: 20px;
+}
+
+.borrowform .col select, .borrowform .col button {
+    font-size: 0.8rem;
 }

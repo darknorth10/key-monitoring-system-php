@@ -4,7 +4,7 @@
     </div>
     <div class="user_table h-75 bg-white rounded shadow-sm mt-4 overflow-scroll">
 
-        <table class="table rounded">
+        <table class="table rounded table-secondary table-striped table-bordered">
             <tr class="table-primary position-sticky top-0">
                 <th>ID</th>
                 <th>Name</th>

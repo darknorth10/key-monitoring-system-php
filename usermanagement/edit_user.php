@@ -39,7 +39,7 @@
     
     <!-- main div wrapper -->
 
-    <div class="main-wrapper bg-light d-flex flex-column h-100 w-100 p-0 m-0">
+    <div class="main-wrapper d-flex flex-column h-100 w-100 p-0 m-0" style="background-color: #eee;">
 
         <!-- header -->
         <nav class="navbar bg-dark" data-bs-theme="dark">
@@ -61,8 +61,10 @@
                 </div>
             </div>
         </nav>
+
         <a class="btn btn-dark mx-4 my-3" href="../main.php#userManagement" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
-        <div class="add_user card bg-white w-50 mx-auto p-0 mt-3">
+
+        <div class="add_user card shadow-sm bg-white w-50 mx-auto p-0 mt-3">
             <div class="card-header pt-3 bg-primary text-white">
                 <h6>Edit User : <span class="border rounded px-2 py-1"><?php echo $rez['username'] ."  |  ". $rez['student_teacher_id']; ?></span></h6>
             </div>
