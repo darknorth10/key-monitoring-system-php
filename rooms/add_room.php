@@ -5,6 +5,10 @@
         header('location: ../index.php');
     }
 
+        if($_SESSION['usertype'] == 'assistant') {
+        header('Location: ../assistant.php');
+
+    }
 
 ?>
 

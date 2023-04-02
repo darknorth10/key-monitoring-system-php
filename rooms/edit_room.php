@@ -1,6 +1,9 @@
 <?php
     session_start();
 
+    if($_SESSION['usertype'] != 'admin') {
+        header('Location: ../assistant.php');
+    }
     if (empty($_SESSION['user']) || empty($_SESSION['getroomid'])) {
         header('location: ../index.php');
     }

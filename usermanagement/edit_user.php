@@ -8,7 +8,10 @@
     if (empty($editUserid)) {
         header('Location: ../main.php#userManagement');
     }
-   
+    if($_SESSION['usertype'] == 'assistant') {
+        header('Location: ../assistant.php');
+
+    }
 
     $sql = "SELECT * FROM user_tbl WHERE user_id = '$editUserid'";
 

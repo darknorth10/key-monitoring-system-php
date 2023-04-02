@@ -4,7 +4,11 @@
     if (empty($_SESSION['user'])) {
         header('location: ../index.php');
     }
+    // will redirect user to dashboard if not admin
+    if($_SESSION['usertype'] == 'assistant') {
+        header('Location: ../assistant.php');
 
+    }
 
 ?>
 

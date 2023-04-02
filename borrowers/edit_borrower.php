@@ -54,7 +54,7 @@
                 </div>
             </div>
         </nav>
-        <a class="btn btn-dark mx-4 mt-3" href="../main.php#borrowerStudent" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
+        <a class="btn btn-dark mx-4 mt-3" href="<?php if($_SESSION['usertype'] != 'admin') { echo '../assistant.php#borrowerStudent'; } else {echo '../main.php#borrowerStudent';} ?>" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
 
         <div class="add_user card bg-white w-50 mx-auto p-0">
             <div class="card-header pt-3 bg-dark text-white">
@@ -90,7 +90,13 @@
                                     $sql = "UPDATE borrowers_tbl SET firstname = '$fname', lastname = '$lname', course = '$course', section = '$section', eligibility = '$eligibility' WHERE stud_employee_no = '$borrowerNo'";
                                     mysqli_query($conn, $sql);
 
-                                    header('location: ../main.php#borrowerStudent');
+                                    if($_SESSION['usertype'] != 'admin') {
+                                        header('Location: ../assistant.php#borrowerStudent');
+                                
+                                    } else {
+                                        header('location: ../main.php#borrowerStudent');
+
+                                    }
 
                                 }
 
