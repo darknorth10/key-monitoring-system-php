@@ -63,7 +63,9 @@
                                         $_SESSION['user'] = $results['username'];
                                         $_SESSION['usertype'] = $results['user_type'];
                                         $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
+                                        $curr_user = $_SESSION['user'];
 
+                                        mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', '$curr_user has logged in.')");
                                         header('location: main.php');
 
                                          // if the user is staff
@@ -72,6 +74,9 @@
                                         $_SESSION['usertype'] = $results['user_type'];
 
                                         $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
+                                        
+                                        $curr_user = $_SESSION['user'];
+                                        mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', '$curr_user has logged in.')");
 
                                         header('location: staff.php');
                                     }
