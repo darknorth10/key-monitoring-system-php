@@ -10,7 +10,7 @@
                 <th>Name</th>
                 <th>Username</th>
                 <th>User Type</th>
-                <th>Teacher / Student ID</th>
+                <th>Teacher / Employee ID</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>

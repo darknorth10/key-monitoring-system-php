@@ -66,21 +66,16 @@
                         $fname = $_POST['fname'];
                         $lname = $_POST['lname'];
                         $tsid = $_POST['tsid'];
-                        $btype = $_POST['btype'];
                         $course = $_POST['course'];
-                        $section = $_POST['section'];
                         $eligibility = $_POST['eligibility'];
 
                         // check if fields are empty
-                        if (empty($fname) || empty($lname) || empty($tsid) || $btype == "false" || $course == "false" || $eligibility == "false") {
+                        if (empty($fname) || empty($lname) || empty($tsid) || $course == "false" || $eligibility == "false") {
                             echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> All Fields are required. </p> </div>";
 
                             // if selected type is student, section field is required
                             // else insert new borrower if given id does not exist yet
-                        } else if($btype == "student") {
-                            if(empty($section)) {
-                                echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Section field is required for student. </p> </div>";
-                            } else {
+                        } else {
                                         $query = "SELECT * FROM borrowers_tbl WHERE stud_employee_no = '$tsid'";
                                         $result = mysqli_query($conn, $query);
 
@@ -88,24 +83,18 @@
                                             echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Borrower with same Teacher or Student ID already exist. </p> </div>";
 
                                         } else {
-                                            $sql = "INSERT INTO borrowers_tbl (stud_employee_no, firstname, lastname, borrowers_type, course, section, eligibility) VALUES ('$tsid', '$fname', '$lname', '$btype', '$course', '$section', '$eligibility')";
+                                            $sql = "INSERT INTO borrowers_tbl (stud_employee_no, firstname, lastname, course, eligibility) VALUES ('$tsid', '$fname', '$lname', '$course', '$eligibility')";
                                             mysqli_query($conn, $sql);
-
                                             echo "<div class='succmessage p-0 rounded text-center text-success'> <p> New Borrower has been registered successfully. </p> </div>";
 
+                                            $curr_user = $_SESSION['user'];
+                                            mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'New Borrower has been registered')");
+                
                                         }
 
                                      }
                             
-                        } else {
-                                $sql = "INSERT INTO borrowers_tbl (stud_employee_no, firstname, lastname, borrowers_type, course, eligibility) VALUES ('$tsid', '$fname', '$lname', '$btype', '$course', '$eligibility')";
-                                mysqli_query($conn, $sql);
-
-                                echo "<div class='succmessage p-0 rounded text-center text-success'> <p> New Borrower has been registered successfully. </p> </div>";
                         }
-
-
-                    }
                        
                            
                     
@@ -129,17 +118,10 @@
                 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="tsid" placeholder="Teacher / Student ID" required>
-                    <label for="floatingInput">Teacher / Student ID</label>
+                    <label for="floatingInput">Teacher ID</label>
                 </div>
 
                 <div class="row mb-3">
-                    <div class="col">
-                        <select name="btype" class="form-select" aria-label="Default select example">
-                            <option value="false" selected>Set Borrower Type</option>
-                            <option value="student">Student</option>
-                            <option value="faculty">Faculty</option>
-                        </select>
-                    </div>
 
                     <div class="col">
                         <select name="course" class="form-select" aria-label="Default select example">
@@ -158,12 +140,6 @@
                 </div>
 
                 <div class="row mb-3">
-                    <div class="col">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="section" placeholder="Section ( Only required for student )">
-                            <label for="floatingInput">Section <span style="font-size: 0.8em;">( required for student )</span></label>
-                        </div>
-                    </div>
 
                     <div class="col">
                         <select name="eligibility" class="form-select" aria-label="Default select example">

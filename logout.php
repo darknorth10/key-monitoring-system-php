@@ -3,6 +3,11 @@
     if (empty($_SESSION['user'])) {
         header('location: index.php');
     }
+    require_once('connection.php');
+    
+    $curr_user = $_SESSION['user'];
+
+    mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'User had logged out')");
 
     session_unset();
     session_destroy();

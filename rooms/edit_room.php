@@ -86,6 +86,10 @@
                             $sql = "UPDATE room_tbl SET room_category = '$category', room_status = '$status' WHERE room_no = '$getroomid'";
                             mysqli_query($conn, $sql);
 
+                            $curr_user = $_SESSION['user'];
+
+                            mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'Room $getroomid has been updated')");
+
                             header('location: ../main.php#rooms');
                         }
                     }

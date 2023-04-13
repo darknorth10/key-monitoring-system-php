@@ -75,36 +75,7 @@
                         if (empty($fname) || empty($lname) || $course == "false" || $eligibility == "false") {
                             echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> All Fields are required. </p> </div>";
                         } else {
-
-                            // if student type
-                            if ($result['borrowers_type'] == "student") {
-                                $query3 = "SELECT * FROM borrowers_tbl WHERE stud_employee_no = '$borrowerNo'";
-                                $result3 = mysqli_fetch_assoc(mysqli_query($conn, $query3));
-                                $section = $_POST['section'];
-                                if(empty($section)) {
-                                    echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Section field is required for student. </p> </div>";
-
-                                } else if ($result3['firstname'] == $fname && $result3['lastname'] == $lname && $result3['course'] == $course &&  $result3['section'] ==  $section && $result3['eligibility'] == $eligibility) {
-                                    echo "<div class='succmessage p-0 rounded text-center text-dark'> <p> No Changes Detected. </p> </div>";
-                                } else {
-                                    $sql = "UPDATE borrowers_tbl SET firstname = '$fname', lastname = '$lname', course = '$course', section = '$section', eligibility = '$eligibility' WHERE stud_employee_no = '$borrowerNo'";
-                                    mysqli_query($conn, $sql);
-
-                                    if($_SESSION['usertype'] != 'admin') {
-                                        header('Location: ../assistant.php#borrowerStudent');
-                                
-                                    } else {
-                                        header('location: ../main.php#borrowerStudent');
-
-                                    }
-
-                                }
-
-                            } 
-                            
-                            // if faculty type
-                            else {
-                                $query = "SELECT * FROM borrowers_tbl WHERE stud_employee_no = '$borrowerNo'";
+                            $query = "SELECT * FROM borrowers_tbl WHERE stud_employee_no = '$borrowerNo'";
                                 $result3 = mysqli_fetch_assoc(mysqli_query($conn, $query));
 
                                 if($result3['firstname'] == $fname && $result3['lastname'] == $lname && $result3['course'] == $course && $result3['eligibility'] == $eligibility) {
@@ -113,11 +84,11 @@
                                     $sql3 = "UPDATE borrowers_tbl SET firstname = '$fname', lastname = '$lname', course = '$course', eligibility = '$eligibility' WHERE stud_employee_no = '$borrowerNo'";
                                     mysqli_query($conn, $sql3);
 
+                                    $curr_user = $_SESSION['user'];
+                                    mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'Borrower No. $borrowerNo has been updated')");
+
                                     header('location: ../main.php#borrowerFaculty');
                                 }
-
-                            }
-                            
 
                         }
                     }
@@ -140,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-
+ 
                 <div class="row mb-3">
                     
 
@@ -166,20 +137,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <?php
-                        $sec = $result['section'];
-                        if($result['borrowers_type'] == 'student') {
-                            echo "<div class='col'>
-                            <div class='form-floating mb-3'>
-                                <input type='text' class='form-control' value='$sec' name='section' placeholder='Section ( Only required for student )'>
-                                <label for='floatingInput'>Section <span style='font-size: 0.8em;'>( required for student )</span></label>
-                            </div>
-                        </div>";
-                        }
-                        
-                    ?>
                     
-
                     <div class="col">
                         <select name="eligibility" class="form-select" aria-label="Default select example">
                             <option value="false">Set Eligibility</option>

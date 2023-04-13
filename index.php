@@ -65,13 +65,15 @@
                                         $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
 
                                         header('location: main.php');
-                                    } else if ($results['user_type'] = 'student_assistant') {
+
+                                         // if the user is staff
+                                    } else if ($results['user_type'] = 'staff') {
                                         $_SESSION['user'] = $results['username'];
                                         $_SESSION['usertype'] = $results['user_type'];
 
                                         $_SESSION['fullname'] = $results['first_name'] . " " . $results['last_name'];
 
-                                        header('location: assistant.php');
+                                        header('location: staff.php');
                                     }
 
                                 } else {

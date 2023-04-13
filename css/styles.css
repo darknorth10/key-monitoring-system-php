@@ -156,7 +156,7 @@ body {
 
 .room_table table tr td, .room_table table tr th {
     font-family: 'Poppins';
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 .room_table table tr td {
     padding-left: 20px;
@@ -172,4 +172,13 @@ body {
 
 .cards .card {
     font-family: 'Inter';
+}
+
+#nonRegTransaction {
+    font-family: 'Poppins';
+    transition: all 0.4s;
+}
+
+#nonRegTransaction input, #nonRegTransaction label {
+    font-size: 0.9rem;
 }

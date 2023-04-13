@@ -88,6 +88,10 @@
                                 $sql = "INSERT INTO `room_tbl`(`room_no`, `room_category`, `floor`, `room_status`) VALUES ('$roomNum','$category','$floor','$status')";
                                 mysqli_query($conn, $sql);
 
+                                $curr_user = $_SESSION['user'];
+
+                                mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'A Room has been added')");
+   
                                 echo "<div class='succmessage p-0 rounded text-center text-success'> <p> Room has been registered. </p> </div>";
 
                             } else {

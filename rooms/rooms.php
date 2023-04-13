@@ -14,9 +14,9 @@
                 <?php
                     require('connection.php');
 
-                    $sql = "SELECT * FROM room_tbl ORDER BY room_no";
+                    $sqlroom = "SELECT * FROM room_tbl ORDER BY room_no";
 
-                    $result = mysqli_query($conn, $sql);
+                    $result = mysqli_query($conn, $sqlroom);
 
                     while($res = mysqli_fetch_assoc($result)) {
                         echo "<tr><td>" . $res['room_no'] . "</td>";

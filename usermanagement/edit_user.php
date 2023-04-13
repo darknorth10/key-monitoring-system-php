@@ -8,8 +8,8 @@
     if (empty($editUserid)) {
         header('Location: ../main.php#userManagement');
     }
-    if($_SESSION['usertype'] == 'assistant') {
-        header('Location: ../assistant.php');
+    if($_SESSION['usertype'] == 'staff') {
+        header('Location: ../staff.php');
 
     }
 
@@ -91,6 +91,10 @@
                             $query = "UPDATE user_tbl SET first_name = '$fname', last_name = '$lname', user_type = '$usertype', status = '$status' WHERE user_id = '$editUserid'";
                              mysqli_query($conn, $query);
 
+                             $curr_user = $_SESSION['user'];
+
+                             mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'User $editUserid has been updated')");
+
                              header('location: ../main.php#userManagement');
                         }
                         
@@ -121,10 +125,10 @@
                         <?php
                             if ($rez['user_type'] == 'admin') {
                                 echo "<option value='admin' selected>Admin</option>
-                                <option value='student assistant'>Student Assistant</option>";
+                                <option value='staff'>Staff</option>";
                             } else {
                                 echo "<option value='admin'>Admin</option>
-                                <option value='student assistant' selected >Student Assistant</option>";
+                                <option value='staff' selected >Staff</option>";
                             }
 
                         ?>

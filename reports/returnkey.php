@@ -69,13 +69,12 @@
                 <th>Transaction No.</th>
                 <th>Borrower ID</th>
                 <th>Full Name</th>
-                <th>Borrower Type</th>
                 <th>Room No.</th>
                 <th>Date & Time Borrowed</th>
                 <th>Status</th>
             </tr>
                 <?php
-                    $sql = "SELECT transaction_tbl.transaction_no, transaction_tbl.borrowers_id, borrowers_tbl.firstname, borrowers_tbl.lastname, borrowers_tbl.borrowers_type,  transaction_tbl.room_no, transaction_tbl.date_time_barrowed, transaction_tbl.date_time_returned, transaction_tbl.transaction_status
+                    $sql = "SELECT transaction_tbl.transaction_no, transaction_tbl.borrowers_id, borrowers_tbl.firstname, borrowers_tbl.lastname, transaction_tbl.room_no, transaction_tbl.date_time_barrowed, transaction_tbl.date_time_returned, transaction_tbl.transaction_status
                      FROM transaction_tbl INNER JOIN borrowers_tbl ON transaction_tbl.borrowers_id = borrowers_tbl.stud_employee_no WHERE transaction_status = 'borrowed'";
 
                     $result = mysqli_query($conn, $sql);
@@ -84,7 +83,6 @@
                         echo "<tr><td class='text-center'>" . $res['transaction_no'] . "</td>";
                         echo "<td class='ps-5'>" . $res['borrowers_id'] . "</td>";
                         echo "<td class='ps-5'>" . $res['firstname'] . " " . $res['lastname'] . "</td>";
-                        echo "<td class='ps-5'>" . $res['borrowers_type'] . "</td>";
                         echo "<td class='ps-5'>" . $res['room_no'] . "</td>";
                         echo "<td class='ps-5'>" . $res['date_time_barrowed'] . "</td>";
                         echo "<td class='ps-5 text-primary'>" . $res['transaction_status'] . "</td></tr>";

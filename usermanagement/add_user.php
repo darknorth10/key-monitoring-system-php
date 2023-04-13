@@ -5,8 +5,8 @@
         header('location: ../index.php');
     }
     // will redirect user to dashboard if not admin
-    if($_SESSION['usertype'] == 'assistant') {
-        header('Location: ../assistant.php');
+    if($_SESSION['usertype'] == 'staff') {
+        header('Location: ../staff.php');
 
     }
 
@@ -89,17 +89,19 @@
                                 echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Select options for user type or status </p> </div>";
 
                             } else {
-                                # $sql = "INSERT INTO `user_tbl`(`user_id`, `first_name`, `last_name`, `username`, `password`, `user_type`, `status`, `student_id`, `teacher_id`) VALUES ( Null,'$fname','$lname','$username','$password','$usertype','$status','$tsid','$tsid')";
                                 $sql = "SELECT * FROM user_tbl WHERE username = '$username' OR student_teacher_id = '$tsid'";
                                 $result = mysqli_query($conn, $sql);
 
                                 if(mysqli_num_rows($result) == 0) {
                                     $sql = "INSERT INTO `user_tbl`(`user_id`, `first_name`, `last_name`, `username`, `password`, `user_type`, `status`, `student_teacher_id`) VALUES ( Null,'$fname','$lname','$username','$password','$usertype','$status','$tsid')";
                                     mysqli_query($conn, $sql);
+                                    $curr_user = $_SESSION['user'];
 
+                                    mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'A user has been added')");
+                                    
                                     echo "<div class='succmessage p-0 rounded text-center text-success'> <p> User has been registered successfuly. </p> </div>";
                                 } else {
-                                    echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Username or Teacher/Student ID already exist. </p> </div>";
+                                    echo "<div class='errmessage p-0 rounded text-center text-danger'> <p> Username or Teacher/Employee ID already exist. </p> </div>";
                                 }
                             }
                         }
@@ -150,7 +152,7 @@
                         <select name="usertype" class="form-select" aria-label="Default select example">
                             <option value="false" selected>Select User Type</option>
                             <option value="admin">Admin</option>
-                            <option value="student assistant">Student Assistant</option>
+                            <option value="staff">Staff</option>
                         </select>
                     </div>
 
@@ -164,8 +166,8 @@
                 </div>
                 
                 <div class="form-floating my-3">
-                    <input type="text" name="tsid" class="form-control" placeholder="Teacher / Student ID" required>
-                    <label for="floatingPassword">Teacher / Student ID</label>
+                    <input type="text" name="tsid" class="form-control" placeholder="Teacher / Employee ID" required>
+                    <label for="floatingPassword">Teacher / Employee ID</label>
                 </div>
                 
                 <button type="submit" name="adduserSubmit" class="btn btn-success d-inline-block w-100">Create User</button>

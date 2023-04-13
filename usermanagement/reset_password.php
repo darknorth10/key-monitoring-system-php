@@ -88,6 +88,11 @@
 
                             $query = "UPDATE user_tbl SET password = '$newpass' WHERE user_id = '$editUserid'";
                             mysqli_query($conn, $query);
+
+                            $curr_user = $_SESSION['user'];
+
+                            mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'Password for user: $editUserid has been changed')");
+
                             header('location: ../main.php#userManagement');
 
                         }}

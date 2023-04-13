@@ -14,7 +14,7 @@
                 <th>Action</th>
             </tr>
                 <?php
-                    $sql = "SELECT * FROM borrowers_tbl WHERE borrowers_type = 'faculty' ORDER BY course";
+                    $sql = "SELECT * FROM borrowers_tbl ORDER BY course";
 
                     $result = mysqli_query($conn, $sql);
 

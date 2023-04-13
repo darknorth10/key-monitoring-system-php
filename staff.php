@@ -1,10 +1,9 @@
 <?php
     session_start();
     require('connection.php');
-    if (empty($_SESSION['user'])) {
+    if (empty($_SESSION['user']) || $_SESSION['usertype'] != 'staff') {
         header('location: index.php');
     }
-
 
 ?>
 
@@ -88,7 +87,7 @@
                 <div class="dashboard h-100 w-100 mb-2 p-3 bg-light" id="dashboard">
                     <h4>Dashboard</h4>
 
-                    <?php include 'dashboard.php'; ?>
+                    <?php include 'dashboard/dashboard.php'; ?>
 
                 </div>
 
