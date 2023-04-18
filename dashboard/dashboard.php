@@ -45,13 +45,13 @@
 
                                 $curr_user = $_SESSION['user'];
 
-                                mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'A Room has been borrowed')");
+                                mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'Room $roomNo has been borrowed by borrower $borrowerNo.')");
 
                                 // update room and borrower status
                                 mysqli_query($conn, "UPDATE room_tbl SET room_status = 'Unavailable' WHERE room_no = '$roomNo'");
                                 mysqli_query($conn, "UPDATE borrowers_tbl SET eligibility = 'ineligible' WHERE stud_employee_no = '$borrowerNo'");
 
-                                echo "<div class='succmessage p-0 rounded text-center text-dark shadow-sm'> <p> Key has been borrowed successfully. </p> </div>";
+                                echo "<div class='succmessage p-0 rounded text-center text-dark shadow-sm'> <p> Key has been borrowed successfully by borrower : $borrowerNo. </p> </div>";
 
                             }  else {
                                 echo "<div class='errmessage p-0 rounded text-center text-danger shadow-sm'> <p> Internal Error : Try again later. </p> </div>";
@@ -90,11 +90,13 @@
                                 $insert = "INSERT INTO `transaction_tbl`(`borrowers_id`, `room_no`, `transaction_status`, `non_faculty`, `fullname`) VALUES ('$borrowerID', '$roomNum', 'borrowed', 'true', '$fullname')";
                                 mysqli_query($conn, $insert);
 
-                                $curr_user = $_SESSION['user'];
-                                mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'A Room has been borrowed by a non-registered personnel.')");
-
                                 // update room and borrower status
                                 mysqli_query($conn, "UPDATE room_tbl SET room_status = 'Unavailable' WHERE room_no = '$roomNum'");
+
+                                $curr_user = $_SESSION['user'];
+                                mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'Room $roomNum has been borrowed by a non-registered personnel: $fullname with ID $borrowerID .')");
+
+                                
 
                                 echo "<div class='succmessage p-0 rounded text-center text-dark shadow-sm'> <p> Key has been borrowed successfully. </p> </div>";
 
@@ -152,8 +154,8 @@
 
                     </div>
                     
-                    <a class="btn btn-dark px-3 my-2" style="font-size: 0.9rem;" data-bs-toggle="collapse" href="#nonRegTransaction" role="button" aria-expanded="false" aria-controls="nonRegTransaction">Non-Registered Borrower</a>
-                    
+                    <a class="btn btn-dark w-25 my-3" style="font-size: 0.9rem;" data-bs-toggle="collapse" href="#nonRegTransaction" role="button" aria-expanded="false" aria-controls="nonRegTransaction">Non-Registered Borrower</a>
+                    <a href="dashboard/returnkey.php" class="btn btn-warning w-25 mx-3" style="font-size: 0.9rem;">Go to Return Key</a>
                     
             </form>
             
@@ -162,7 +164,7 @@
 
         <!-- Non Reg Transaction -->
         <div class="borrowform collapse rounded shadow-sm w-100 my-2" style="font-family: 'Poppins'; background-color:  #e0e0e0;" id="nonRegTransaction">
-            <h6 class="bg-info rounded ps-4 py-3" style="font-size: 0.9em; color: white;">Borrow Key</h6>
+            <h6 class="bg-primary rounded ps-4 py-3" style="font-size: 0.9em; color: white;">Borrow Key | Non-Registered</h6>
             <form method="post" class="px-4 py-3">
                 <!-- collapse form for non-registered borrower -->
                 <div class="row rounded" >
@@ -197,7 +199,7 @@
                         </div>
                         
                         <div class="col">
-                            <button type="submit" name="borrowNonSubmit" class="btn btn-info shadow-sm w-100">Borrow Key <img src="assets/images/key3.png" width="15" height='15'></button>
+                            <button type="submit" name="borrowNonSubmit" class="btn btn-primary shadow-sm w-100">Borrow Key <img src="assets/images/key3.png" width="15" height='15'></button>
 
                         </div>
                 </div>

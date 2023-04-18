@@ -31,7 +31,7 @@ body {
 
 #loginform input {
     font-size: 0.8rem;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     text-align: center;
 }
 
@@ -49,7 +49,7 @@ body {
 
 .err_text {
     font-size: 0.7rem;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     text-decoration: dotted;
     background-color: rgb(253, 235, 235);
 }
@@ -79,7 +79,7 @@ body {
 #nav li a {
     text-decoration: none ;
     color: #212121;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-size: 0.7rem;
     display: block;
     width: 100%;
@@ -102,7 +102,7 @@ body {
 
 
 .user_table table tr {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-size: 0.8rem;
     box-sizing: border-box;
 }
@@ -112,7 +112,7 @@ body {
 
 }
 .user_table table td {
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-size: 0.7rem;
     padding-left: 18px;
     box-sizing: border-box;
@@ -130,7 +130,7 @@ body {
 
 #add_user_form input, #add_user_form label, #add_user_form select {
     font-size: 0.8em;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
 }
 
 #add_user_form select { 
@@ -139,7 +139,7 @@ body {
 
 .errmessage {
     font-size: 0.7rem;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     background-color: rgb(242, 213, 213);
 }
 .errmessage p {
@@ -147,7 +147,7 @@ body {
 }
 .succmessage {
     font-size: 0.7rem;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     background-color: rgb(228, 253, 247);
 }
 .succmessage p {
@@ -155,7 +155,7 @@ body {
 }
 
 .room_table table tr td, .room_table table tr th {
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-size: 0.8rem;
 }
 .room_table table tr td {
@@ -171,11 +171,11 @@ body {
 }
 
 .cards .card {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
 }
 
 #nonRegTransaction {
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     transition: all 0.4s;
 }
 
