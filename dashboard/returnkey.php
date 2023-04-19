@@ -62,7 +62,8 @@
             </div>
         </nav>
 
-        <a href="../main.php" class="btn btn-dark px-3 py-2 m-2" style="font-family: 'Poppins'; width: 120px;">Back</a>
+        <a href="<?php echo $userType = ($_SESSION['usertype'] == 'staff') ? '../staff.php' : '../main.php';?>" class="btn btn-dark px-3 py-2 m-2" style="font-family: 'Poppins'; width: 120px;">Back</a>
+        
         <div class="main-return mx-auto my-3 h-100 w-75 bg-light p-2 overflow-y-scroll">
             <div class="borrowform rounded shadow-sm w-100" style="font-family: 'Poppins'; background-color:  #e0e0e0;">
                 <h6 class="bg-success rounded ps-4 py-3" style="font-size: 0.9em; color: white;">Return Key</h6>

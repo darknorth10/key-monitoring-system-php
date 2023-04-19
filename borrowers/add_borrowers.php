@@ -52,7 +52,7 @@
                 </div>
             </div>
         </nav>
-        <a class="btn btn-dark mx-4 mt-3" href="<?php if($_SESSION['usertype'] != 'admin') { echo '../assistant.php#borrowerStudent'; } else {echo '../main.php#borrowerStudent';} ?>" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
+        <a class="btn btn-dark mx-4 mt-3" href="<?php echo $userType = ($_SESSION['usertype'] == 'staff') ? '../staff.php#borrowerFaculty' : '../main.php#borrowerFaculty';?>" style="font-family:'Poppins'; font-size:0.7rem; width:7%;">BACK</a>
 
         <div class="add_user card bg-white w-50 mx-auto p-0">
             <div class="card-header pt-3 bg-primary text-white">

@@ -61,22 +61,9 @@
                     <img src="assets/images/university-seal.png" alt="">
                 </div>
                 <ul type="none" class="w-100 mx-0 mt-2 py-1" id="nav">
-                    <li><a href="assistant.php">Dashboard</a></li>
+                    <li><a href="staff.php">Dashboard</a></li>
 
-                    <li id="barrowLi"><a data-bs-toggle="collapse" href="#borrowersSubMenu" role="button" aria-expanded="false" aria-controls="borrowersSubMenu" id="bsubmenuToggle">Borrowers Profile <img class="ms-1" src="assets/images/down-arrow.png" width="10" height="10" id="bcarret"></a></li>
-
-                    <ul class="p-0 collapse shadow-inner m-1" style="background-color: #eee;" id="borrowersSubMenu" type="none">
-                        <li><a href="#borrowerStudent">Student</a></li>
-                        <li><a href="#borrowerFaculty">Faculty</a></li>
-                    </ul>
-
-                    <li id="transLi"><a data-bs-toggle="collapse" href="#transactionSubMenu" role="button" aria-expanded="false" aria-controls="transactionSubMenu" id="submenuToggle">Transactions <img class="ms-4" src="assets/images/down-arrow.png" width="10" height="10" id="carret"></a></li>
-
-                    <ul class="p-0 collapse shadow-inner" style="background-color: #eee;" id="transactionSubMenu" type="none">
-                        <li><a href="#borrow">Borrow Room</a></li>
-                        <li><a href="#returnKey">Return Key</a></li>
-                    </ul>
-
+                    <li id="barrowLi"><a href="#borrowerFaculty">Borrowers Profile</a></li>
                 </ul>
             </div>
 
@@ -92,34 +79,12 @@
                 </div>
 
                 <!-- BARROWERS PROFILE -->
-                <!-- for student -->
-                <div class="borrowersStudent h-100 w-100 mb-2 p-3 bg-light" id="borrowerStudent">
-                    <h4>Borrowers Profile | Student</h4>
 
-                    <?php include 'borrowers/borrowers_student.php'; ?>
-                </div>
                 <!-- for faculty -->
                 <div class="borrowerFaculty h-100 w-100 mb-2 p-3 bg-light" id="borrowerFaculty">
-                    <h4>Borrowers Profile | Faculty</h4>
+                    <h4>Borrowers Profile</h4>
 
                     <?php include 'borrowers/borrowers_faculty.php'; ?>
-                </div>
-
-                
-                <!--  Transactions -->
-                <div class="transaction h-100 w-100 mb-2 p-3 bg-light" id="borrow">
-                    <h4>Transaction | Borrow Room</h4>
-
-                    <?php include 'transactions/borrowkey.php'; ?>
-
-                </div>
-
-                <!--  Transactions -->
-                <div class="transaction h-100 w-100 mb-2 p-3 bg-light" id="returnKey">
-                    <h4>Transaction | Return Key</h4>
-
-                    <?php include 'transactions/returnkey.php'; ?>
-
                 </div>
 
 
