@@ -64,33 +64,33 @@
 
         <a href="<?php echo $userType = ($_SESSION['usertype'] == 'staff') ? '../staff.php' : '../main.php';?>" class="btn btn-dark px-3 py-2 m-2" style="font-family: 'Poppins'; width: 120px;">Back</a>
         
-        <div class="main-return mx-auto my-3 h-100 w-75 bg-light p-2 overflow-y-scroll">
-            <div class="borrowform rounded shadow-sm w-100" style="font-family: 'Poppins'; background-color:  #e0e0e0;">
-                <h6 class="bg-success rounded ps-4 py-3" style="font-size: 0.9em; color: white;">Return Key</h6>
-                <form class="px-4 py-3" method="post">
+        <div class="main-return mx-auto my-3 h-100 w-75 bg-light p-2">
+            <form class="borrowform rounded bg-white shadow-sm w-100" method="post" style="font-family: 'Poppins'; background-color:  #e0e0e0;">
+                <h6 class="bg-success rounded ps-4 py-3" style="font-size: 0.9em; color: white;">Return Key : <span class="border rounded px-2 py-1">Room <?php echo $_SESSION['returnKey'];?></span></h6>
                     <?php
                         if (isset($_POST['returnSubmit'])) {
-                            $roomNo = $_POST['roomNo'];
+                            $roomNo = $_SESSION['returnKey'];
 
-                            if ($roomNo == 'false') {
-                                echo "<div class='errmessage p-0 rounded text-center text-danger shadow-sm'> <p> All selection are required. </p> </div>";
-                                
-                            } else {
+                          
                                 $sqlCheck = "SELECT * FROM transaction_tbl WHERE room_no = '$roomNo' AND transaction_status = 'borrowed'";
                                 $result1 = mysqli_query($conn, $sqlCheck);
                                 $res1 = mysqli_fetch_assoc($result1);
-                                $borrowerNo = $res1['borrowers_id'];
+                                $borrowerNo = $res1['borrowers_id'] ?? "";
                                 // 2 validation errors for returning key
                                 if(mysqli_num_rows($result1) == 1 ) {
                                     // update transaction, room and borrower status
                                     mysqli_query($conn, "UPDATE room_tbl SET room_status = 'Available' WHERE room_no = '$roomNo'");
                                     mysqli_query($conn, "UPDATE borrowers_tbl SET eligibility = 'eligible' WHERE stud_employee_no = '$borrowerNo'");
                                     mysqli_query($conn, "UPDATE transaction_tbl SET date_time_returned = now(), transaction_status = 'returned' WHERE room_no = '$roomNo' AND transaction_status = 'borrowed'");
-
-                                    echo "<div class='succmessage p-0 rounded text-center text-dark shadow-sm'> <p> Key has been returned successfully. </p> </div>";
                                     
                                     $curr_user = $_SESSION['user'];
                                     mysqli_query($conn, "INSERT INTO `audit_tbl`(`user`, `action`) VALUES ('$curr_user', 'Room $roomNo has been returned.')");
+
+                                    if ($_SESSION['usertype'] == 'admin')
+                                        header('location: ../main.php');
+                                    else
+                                        header('location: ../staff.php');
+
     
                                 } else if(mysqli_num_rows($result1) == 0 ) {
                                     echo "<div class='errmessage p-0 rounded text-center text-danger shadow-sm'> <p> Selected room was not in the borrowed list. </p> </div>";                            
@@ -100,76 +100,12 @@
 
                                 }
                             }
-                        }
-
-
 
                     ?>
-                        <div class="borrowform row">
-
-                            <div class="col">
-                                <select name="roomNo" class="form-select" aria-label="Default select example">
-                                    <option value="false" selected>Select Room No.</option>
-                                    <?php
-                                    // list of available rooms
-                                        $sqlRoomNo = "SELECT room_no FROM transaction_tbl WHERE transaction_status = 'borrowed'";
-
-                                        $resultRoomNo = mysqli_query($conn, $sqlRoomNo);
-
-                                        while($res = mysqli_fetch_assoc($resultRoomNo)) {
-                                            echo "<option value='" . $res['room_no'] . "'>".  "Room " . $res['room_no'] . "</option>";
-                                        }
-
-                                    ?>
-                                </select>
-                            </div>
-
-                            <div class="col">
-                                <button type="submit" name="returnSubmit" class="btn btn-success shadow-sm w-100">Return Key <img src="assets/images/key3.png" width="15" height='15'></button>
-                            </div>
-
-                        </div>
-                </form>
-            </div>
+             <p class="p-3 fs-4 text-center">Confirm to return key for room <?php echo $_SESSION['returnKey']; ?></p>
+             <div class="d-flex justify-content-end pe-5 pb-4"><button type="submit" name="returnSubmit" class="btn btn-success px-4 py-2" style="width: 150px;">Confirm</button></div>
+            </form>
         </div>
-
-        <div class="room_table px-4 h-75 w-75 mx-auto bg-white rounded shadow-sm mt-4 overflow-y-scroll">
-
-        <table class="table rounded table-secondary table-striped table-bordered">
-            <tr class="table-primary position-sticky top-0">
-                <th>Transaction No.</th>
-                <th>Borrower ID</th>
-                <th>Full Name</th>
-                <th>Room No.</th>
-                <th>Date & Time Borrowed</th>
-                <th>Status</th>
-                <th>Type</th>
-            </tr>
-                <?php
-                    $sql = "SELECT * FROM transaction_tbl WHERE transaction_status = 'borrowed'";
-
-                    $result = mysqli_query($conn, $sql);
-
-                    while($res = mysqli_fetch_assoc($result)) {
-                        echo "<tr><td class='text-center'>" . $res['transaction_no'] . "</td>";
-                        echo "<td>" . $res['borrowers_id'] . "</td>";
-                        echo "<td class='ps-5'>" . $res['fullname'] . "</td>";
-                        echo "<td class='ps-4'>" . $res['room_no'] . "</td>";
-                        echo "<td class='ps-4'>" . $res['date_time_barrowed'] . "</td>";
-                        echo "<td class='ps-4 text-primary'>" . $res['transaction_status'] . "</td>";
-                        if ($res['non_faculty'] == 'false') {
-                            echo "<td class='ps-4 text-success'>Registered</td></tr>";
-                        } else if ($res['non_faculty'] == 'true') {
-                            echo "<td class='ps-4 text-danger'>Non Registered</td></tr>";
-                        }
-                    }
-
-                ?>
-
-
-        </table>
-        </div>
-
     </div>
 
 </body>

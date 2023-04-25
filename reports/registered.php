@@ -13,15 +13,14 @@
                 <th>Status</th>
             </tr>
                 <?php
-                    $sql = "SELECT transaction_tbl.transaction_no, transaction_tbl.borrowers_id, borrowers_tbl.firstname, borrowers_tbl.lastname, transaction_tbl.room_no, transaction_tbl.date_time_barrowed, transaction_tbl.date_time_returned, transaction_tbl.transaction_status
-                     FROM transaction_tbl INNER JOIN borrowers_tbl ON transaction_tbl.borrowers_id = borrowers_tbl.stud_employee_no";
+                    $sql = "SELECT * from transaction_tbl where non_faculty = 'false'";
 
                     $result = mysqli_query($conn, $sql);
 
                     while($res = mysqli_fetch_assoc($result)) {
                         echo "<tr><td class='text-center'>" . $res['transaction_no'] . "</td>";
                         echo "<td>" . $res['borrowers_id'] . "</td>";
-                        echo "<td class='ps-5'>" . $res['firstname'] . " " . $res['lastname'] . "</td>";
+                        echo "<td class='ps-5'>" . $res['fullname'] . "</td>";
                         echo "<td class='ps-4'>" . $res['room_no'] . "</td>";
                         echo "<td class='ps-4'>" . $res['date_time_barrowed'] . "</td>";
                         echo "<td class='ps-4'>" . $res['date_time_returned'] . "</td>";

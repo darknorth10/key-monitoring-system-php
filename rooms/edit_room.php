@@ -65,7 +65,7 @@
 
         <div class="add_user card bg-white w-50 mx-auto p-0 mt-3">
             <div class="card-header pt-3 bg-primary text-white">
-                <h6>Edit Room : <span class="border rounded px-2 py-1"><?php echo $result['room_no'];?></h6>
+                <h6>Edit Room : <span class="border rounded px-2 py-1"><?php echo $result['room_no'];?></span></h6>
             </div>
             <form class="p-3" method="post" id="edit_room_form">
 
@@ -117,10 +117,13 @@
                             <?php
                                 if ($result['room_status'] == "Available") {
                                     echo "<option value='Available' selected>Available</option>
-                                    <option value='Unavailable'>Unavailable</option>";
+                                    <option value='Maintenance'>Maintenance</option>";
                                 } else if ($result['room_status'] == "Unavailable") {
+                                    echo "<option value='Unavailable' selected>Unavailable</option>";
+                                    
+                                } else {
                                     echo "<option value='Available'>Available</option>
-                                    <option value='Unavailable' selected>Unavailable</option>";
+                                    <option value='Maintenance' selected>Maintenance</option>";
                                 }
                             ?>
                         </select>

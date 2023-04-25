@@ -24,8 +24,10 @@
                         echo "<td>" . $res['floor'] . "</td>";
                         if($res['room_status'] == 'Available') {
                             echo "<td class='text-primary'>" . $res['room_status'] . "</td>";
-                        } else {
+                        } else if ($res['room_status'] == 'Unavailable') {
                             echo "<td class='text-danger'>" . $res['room_status'] . "</td>";
+                        } else {
+                            echo "<td class='text-secondary'>" . $res['room_status'] . "</td>";
                         }
                         
                         echo "<td><form method='post' action='rooms/get_room_id.php'> <input type='hidden' name='getroomid' value='" . $res['room_no'] . "'/>

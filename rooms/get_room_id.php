@@ -1,5 +1,4 @@
 <?php
-    require_once('../connection.php');
     session_start();
 
     $_SESSION['getroomid'] = $_POST['getroomid'];

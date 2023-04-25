@@ -135,7 +135,7 @@
                         <select name="roomstatus" class="form-select" aria-label="Default select example">
                             <option value="false" selected>Room Status</option>
                             <option value="Available">Available</option>
-                            <option value="Unavailable">Unavailable</option>
+                            <option value="Maintenance">Maintenance</option>
                         </select>
                     </div>
                 </div>
